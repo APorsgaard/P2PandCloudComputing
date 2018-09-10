@@ -1,12 +1,10 @@
 var express = require('express'),
-  actuatorsRoutes = require('./../Routes/actuators'),
-  sensorRoutes = require('./../Routes/sensors'),
-  resources = require('./../Resources/model'),
+  actuatorsRoutes = require('./../routes/actuators'),
+  sensorRoutes = require('./../routes/sensors'),
+  resources = require('./../resources/model'),
   cors = require('cors');
 
 var app = express();
-
-app.use(bodyParser.json());
 
 app.use(cors());
 

@@ -20,6 +20,7 @@ WORKDIR /usr/src/wot-server
 COPY package*.json ./
 
 RUN npm install
+RUN npm install cors --save
 
 # Bundle app source
 COPY . .
