@@ -2,9 +2,9 @@
   "name": "iot-project",
   "version": "1.0.0",
   "description": "Example AU IOT project",
-  "main": "src/app.js",
+  "main": "src/wot-server.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node src/wot-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michal Ratajsky <michal.ratajsky@post.au.dk>",

@@ -12,7 +12,7 @@ RUN apk add --no-cache curl gcc g++ make python2 && \
  apk del curl
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/wot-server
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
