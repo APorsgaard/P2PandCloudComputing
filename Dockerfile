@@ -1,3 +1,4 @@
+
 FROM arm32v6/node:alpine
 
 # Install some extra packages to make sure we can build and "npm install" our dependencies later
@@ -19,8 +20,12 @@ WORKDIR /usr/src/wot-server
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install
+RUN npm install node-json2html msgpack5 --save
 RUN npm install cors --save
+RUN npm install node-dht-sensor --save
+RUN npm install object-observer --save
+RUN npm install express --save
+RUN npm install
 
 # Bundle app source
 COPY . .

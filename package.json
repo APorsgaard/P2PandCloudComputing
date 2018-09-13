@@ -10,9 +10,13 @@
   "author": "Michal Ratajsky <michal.ratajsky@post.au.dk>",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.13.1",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "msgpack5": "^3.3.0",
     "node-dht-sensor": "0.0.34",
+    "node-json2html": "^1.0.0",
+    "object-observer": "^1.0.3",
     "onoff": "^3.2.1"
   }
 }
