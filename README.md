@@ -21,7 +21,7 @@ $ docker run -d --rm -p 8080:8080 --privileged fancy-pants/iot-assignment
 ## Location of dynamic webpage
 
 ```
-The web page is located at aspberrypi.local:8080
+The web page is located at raspberrypi.local:8080
 ```
 =======
 # Milestone2
