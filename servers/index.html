@@ -1,36 +1,99 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>IoT Project</title>
-<script src="script.js"></script>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IoT Project</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Temperature:</h1>
 
-<h2>IoT status of Raspberry Pi<h2>
+    <h2 id='temp1'></h2>
 
-<h3>Temperature:<h3>
-<p id="temp1"></p>
+    <h1>Humidity:</h1>
 
-<h3>Humidity:<h3>
-<p id="temp2"></p>
+    <h2 id='temp2'></h2>
 
-<h3>Motion:<h3>
-<p id="temp3"></p>
+    <h1>Motion:</h1>
 
-<h3>Blue LED:<h3>
-<p id="temp4"></p>
+    <h2 id='temp3'></h2>
 
-<h3>Red LED:<h3>
-<p id="temp5"></p>
+    <h1>Blue LED:</h1>
 
-<h3>Yellow LED:<h3>
-<p id="temp6"></p>
+    <h2 id='temp4'></h2>
 
-<button onclick="switchLED1On()">Blue LED</button>
+    <h1>Red LED:</h1>
 
-<button onclick="switchLED2On()">Red LED</button>
+    <h2 id='temp5'></h2>
 
-<button onclick="switchLED3On()">Yellow LED</button>
+    <h1>Yellow LED:</h1>
 
-</body>
+    <h2 id='temp6'></h2>
+
+    <script>
+$(document).ready(
+  function doPoll() {
+    $.getJSON('http://raspberrypi.local:8080/pi/sensors/temperature',
+      function (data) {
+        console.log(data);
+        $('#temp1').html(data.value + ' ' + data.unit);
+        setTimeout(doPoll, 5000);
+    });
+  });
+
+$(document).ready(
+  function doPoll() {
+    $.getJSON('http://raspberrypi.local:8080/pi/sensors/humidity',
+      function (data) {
+        console.log(data);
+        $('#temp2').html(data.value + ' ' + data.unit);
+        setTimeout(doPoll, 5000);
+    });
+  });
+
+$(document).ready(
+  function doPoll() {
+    $.getJSON('http://raspberrypi.local:8080/pi/sensors/pir',
+      function (data) {
+        console.log(data);
+        $('#temp3').html(data.value + ' ');
+        setTimeout(doPoll, 5000);
+    });
+  });
+
+$(document).ready(
+  function doPoll() {
+    $.getJSON('http://raspberrypi.local:8080/pi/actuators/leds/1',
+      function (data) {
+        console.log(data);
+        $('#temp4').html(data.value + ' ');
+        setTimeout(doPoll, 5000);
+    });
+  });
+
+$(document).ready(
+  function doPoll() {
+    $.getJSON('http://raspberrypi.local:8080/pi/actuators/leds/2',
+      function (data) {
+        console.log(data);
+        $('#temp5').html(data.value + ' ');
+        setTimeout(doPoll, 5000);
+    });
+  });
+
+$(document).ready(
+  function doPoll() {
+    $.getJSON('http://raspberrypi.local:8080/pi/actuators/leds/3',
+      function (data) {
+        console.log(data);
+        $('#temp6').html(data.value + ' ');
+        setTimeout(doPoll, 5000);
+    });
+  });
+
+    </script>
+  </body>
 </html>
+
