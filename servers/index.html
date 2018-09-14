@@ -32,7 +32,14 @@
 
     <h2 id='temp6'></h2>
 
-    <script>
+<button onclick="switchLED1()"> Switch Blue LED</button>
+
+<button onclick="switchLED2()"> Switch Red LED</button>
+
+<button onclick="switchLED3()"> Switch Yellow LED</button>
+
+
+ <script>
 $(document).ready(
   function doPoll() {
     $.getJSON('http://raspberrypi.local:8080/pi/sensors/temperature',
@@ -93,6 +100,29 @@ $(document).ready(
     });
   });
 
+function switchLED1(){
+	  $.ajax({
+            url: 'http://raspberrypi.local:8080/pi/actuators/leds/1',
+            type: 'PUT',    
+            //data: JSON.stringify({"value": true}),
+            //contentType: 'application/json'
+      });  
+}
+
+function switchLED2(){
+	  $.ajax({
+            url: 'http://raspberrypi.local:8080/pi/actuators/leds/2',
+            type: 'PUT',    
+      });  
+}
+
+function switchLED3(){
+	  $.ajax({
+            url: 'http://raspberrypi.local:8080/pi/actuators/leds/3',
+            type: 'PUT',    
+      });  
+}
+ 
     </script>
   </body>
 </html>
