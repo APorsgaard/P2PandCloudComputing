@@ -26,20 +26,22 @@
       }
     },
     "actuators": {
-      "1": {
-      "name": "LED 1",
-      "value": false,
-      "gpio": 4
-      },
-      "2": {
-      "name": "LED 2",
-      "value": false,
-      "gpio": 2
-      },
-      "3": {
-      "name": "LED 3",
-      "value": false,
-      "gpio": 22
+      "leds": {
+        "1": {
+          "name": "LED 1",
+          "value": false,
+          "gpio": 4
+        },
+        "2": {
+          "name": "LED 2",
+          "value": false,
+          "gpio": 2
+        },
+        "3": {
+          "name": "LED 3",
+          "value": false,
+          "gpio": 22
+        }
       }
     }
   }
