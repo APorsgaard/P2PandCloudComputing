@@ -65,7 +65,7 @@ $(document).ready(
     $.getJSON('http://raspberrypi.local:8080/pi/sensors/pir',
       function (data) {
         console.log(data);
-        $('#temp3').html(data.value ? 'There is someone!' : 'Not anymore!' + ' ');
+        $('#temp3').html(data.value ? 'There is someone!' : 'Not anymore!');
         setTimeout(doPoll, 5000);
     });
   });
@@ -75,7 +75,7 @@ $(document).ready(
     $.getJSON('http://raspberrypi.local:8080/pi/actuators/leds/1',
       function (data) {
         console.log(data);
-        $('#temp4').html(data.value ? '1' : '0' + ' ');
+        $('#temp4').html(data.value ? '1' : '0');
         setTimeout(doPoll, 5000);
     });
   });
@@ -85,7 +85,7 @@ $(document).ready(
     $.getJSON('http://raspberrypi.local:8080/pi/actuators/leds/2',
       function (data) {
         console.log(data);
-        $('#temp5').html(data.value ? '1' : '0' + ' ');
+        $('#temp5').html(data.value ? '1' : '0');
         setTimeout(doPoll, 5000);
     });
   });
@@ -95,7 +95,7 @@ $(document).ready(
     $.getJSON('http://raspberrypi.local:8080/pi/actuators/leds/3',
       function (data) {
         console.log(data);
-        $('#temp6').html(data.value ? '1' : '0' + ' ' );
+        $('#temp6').html(data.value ? '1' : '0');
         setTimeout(doPoll, 5000);
     });
   });

@@ -12,16 +12,16 @@ router.route('/leds').get(function (req, res, next) {
   next();
 });
 
-router.route('/leds/:id').get(function (req, res, next) { //#A
+router.route('/leds/:id').get(function (req, res, next) {
   req.result = resources.pi.actuators.leds[req.params.id];
   next();
-}).put(function(req, res, next) { //#B
+}).put(function(req, res, next) {
 
   var selectedLed = resources.pi.actuators.leds[req.params.id];
   if(selectedLed.value) {
 	selectedLed.value = false;
   } else { selectedLed.value = true;
-  } //#C
+  }
   req.result = selectedLed;
   next();
 });

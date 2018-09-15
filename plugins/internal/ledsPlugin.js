@@ -51,17 +51,17 @@ exports.stop = function () {
 function switchOnOff(value,model) {
 	if (!localParams.simulate) {
 		if(pluginName1===model.name){
-			actuator1.write(value === true ? 1 : 0, function () { //#C
+			actuator1.write(value === true ? 1 : 0, function () {
 				console.info('Changed value of %s to %s', pluginName1, value);
 			});
 		}
 		else if(pluginName2===model.name){
-			actuator2.write(value === true ? 1 : 0, function () { //#C
+			actuator2.write(value === true ? 1 : 0, function () {
 				console.info('Changed value of %s to %s', pluginName2, value);
 			});
 		}
 		else if(pluginName3===model.name){
-			actuator3.write(value === true ? 1 : 0, function () { //#C
+			actuator3.write(value === true ? 1 : 0, function () {
 				console.info('Changed value of %s to %s', pluginName3, value);
 			});
 		}
@@ -80,7 +80,6 @@ function connectHardware() {
 
 function simulate() {
   interval = setInterval(function () {
-    // Switch value on a regular basis
     if (model1.value) {
       model1.value = false;
     } else if (model2.value) {

@@ -28,16 +28,16 @@ function connectHardware() {
  var sensorDriver = require('node-dht-sensor');
   var sensor = {
     initialize: function () {
-      return sensorDriver.initialize(22, model.temperature.gpio); //#A
+      return sensorDriver.initialize(22, model.temperature.gpio);
     },
     read: function () {
-      var readout = sensorDriver.read(); //#B
+      var readout = sensorDriver.read();
       model.temperature.value = parseFloat(readout.temperature.toFixed(2));
-      model.humidity.value = parseFloat(readout.humidity.toFixed(2)); //#C
+      model.humidity.value = parseFloat(readout.humidity.toFixed(2));
       showValue();
 
       setTimeout(function () {
-        sensor.read(); //#D
+        sensor.read();
       }, localParams.frequency);
     }
   };

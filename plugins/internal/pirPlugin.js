@@ -5,7 +5,7 @@ var model = resources.pi.sensors.pir;
 var pluginName = resources.pi.sensors.pir.name;
 var localParams = {'simulate': false, 'frequency': 2000};
 
-exports.start = function (params) { //#A
+exports.start = function (params) {
   localParams = params;
   if (localParams.simulate) {
     simulate();
@@ -14,7 +14,7 @@ exports.start = function (params) { //#A
   }
 };
 
-exports.stop = function () { //#A
+exports.stop = function () {
   if (localParams.simulate) {
     clearInterval(interval);
   } else {
@@ -23,10 +23,10 @@ exports.stop = function () { //#A
   console.info('%s plugin stopped!', pluginName);
 };
 
-function connectHardware() { //#B
+function connectHardware() {
   var Gpio = require('onoff').Gpio;
-  sensor = new Gpio(model.gpio, 'in', 'both'); //#C
-  sensor.watch(function (err, value) { //#D
+  sensor = new Gpio(model.gpio, 'in', 'both');
+  sensor.watch(function (err, value) {
     if (err) exit(err);
     model.value = !!value;
     showValue();
@@ -34,7 +34,7 @@ function connectHardware() { //#B
   console.info('Hardware %s sensor started!', pluginName);
 };
 
-function simulate() { //#E
+function simulate() {
   interval = setInterval(function () {
     model.value = !model.value;
     showValue();

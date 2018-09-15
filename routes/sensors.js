@@ -3,8 +3,8 @@ var express = require('express'),
   resources = require('./../resources/model');
 
 router.route('/').get(function (req, res, next) {
-  req.result = resources.pi.sensors; //#A
-  next(); //#B
+  req.result = resources.pi.sensors;
+  next();
 });
 
 router.route('/pir').get(function (req, res, next) {

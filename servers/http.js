@@ -5,7 +5,6 @@ var express = require('express'),
   converter = require('./../middleware/converter'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
-  //fs = require('fs'),
   path = require('path');
 
 var app = express();
