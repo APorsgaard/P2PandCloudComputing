@@ -8,35 +8,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   </head>
   <body>
-    <h1>Temperature:</h1>
+    <h3>Temperature:</h3>
 
-    <h2 id='temp1'></h2>
+    <h4 id='temp1'></h4>
 
-    <h1>Humidity:</h1>
+    <h3>Humidity:</h3>
 
-    <h2 id='temp2'></h2>
+    <h4 id='temp2'></h4>
 
-    <h1>Motion:</h1>
+    <h3>Motion:</h3>
 
-    <h2 id='temp3'></h2>
+    <h4 id='temp3'></h4>
 
-    <h1>Blue LED:</h1>
+    <h3>Blue LED:</h3>
 
-    <h2 id='temp4'></h2>
+    <h4 id='temp4'></h4>
 
-    <h1>Red LED:</h1>
+    <h3>Red LED:</h3>
 
-    <h2 id='temp5'></h2>
+    <h4 id='temp5'></h4>
 
-    <h1>Yellow LED:</h1>
+    <h3>Yellow LED:</h3>
 
-    <h2 id='temp6'></h2>
+    <h4 id='temp6'></h4>
 
-<button onclick="switchLED1()"> Switch Blue LED</button>
+<button onclick="switchLED1()"> Switch Blue LED on/off</button>
 
-<button onclick="switchLED2()"> Switch Red LED</button>
+<button onclick="switchLED2()"> Switch Red LED on/off</button>
 
-<button onclick="switchLED3()"> Switch Yellow LED</button>
+<button onclick="switchLED3()"> Switch Yellow LED on/off</button>
 
 
  <script>
@@ -65,7 +65,7 @@ $(document).ready(
     $.getJSON('http://raspberrypi.local:8080/pi/sensors/pir',
       function (data) {
         console.log(data);
-        $('#temp3').html(data.value + ' ');
+        $('#temp3').html(data.value ? 'There is someone!' : 'Not anymore!' + ' ');
         setTimeout(doPoll, 5000);
     });
   });
@@ -75,7 +75,7 @@ $(document).ready(
     $.getJSON('http://raspberrypi.local:8080/pi/actuators/leds/1',
       function (data) {
         console.log(data);
-        $('#temp4').html(data.value + ' ');
+        $('#temp4').html(data.value ? '1' : '0' + ' ');
         setTimeout(doPoll, 5000);
     });
   });
@@ -85,7 +85,7 @@ $(document).ready(
     $.getJSON('http://raspberrypi.local:8080/pi/actuators/leds/2',
       function (data) {
         console.log(data);
-        $('#temp5').html(data.value + ' ');
+        $('#temp5').html(data.value ? '1' : '0' + ' ');
         setTimeout(doPoll, 5000);
     });
   });
@@ -95,7 +95,7 @@ $(document).ready(
     $.getJSON('http://raspberrypi.local:8080/pi/actuators/leds/3',
       function (data) {
         console.log(data);
-        $('#temp6').html(data.value + ' ');
+        $('#temp6').html(data.value ? '1' : '0' + ' ' );
         setTimeout(doPoll, 5000);
     });
   });
