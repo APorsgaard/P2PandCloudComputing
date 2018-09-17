@@ -1,5 +1,6 @@
 var httpServer = require('../servers/http'),
-   resources = require('../resources/model');
+    wsServer = require('../servers/websockets'),
+    resources = require('../resources/model');
 
 var ledsPlugin = require('../plugins/internal/ledsPlugin'), //#A
     pirPlugin = require('../plugins/internal/pirPlugin'), //#A
@@ -13,4 +14,6 @@ dhtPlugin.start({'simulate': false, 'frequency': 10000}); //#B
 
 var server = httpServer.listen(resources.pi.port, function (){
    console.info('Server has started');
+
+   wsServer.listen(server);
 });

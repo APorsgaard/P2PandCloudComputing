@@ -8,7 +8,7 @@ var interval;
 
 console.log('Using Thng #'+thngId+' with API Key: '+ thngApiKey);
 
-var client = mqtt.connect("mqtts://mqtt.evrythng.com:8883", {// #B
+var client = mqtt.connect("mqtts://mqtt.evrythng.com:8080", {// #B
   username: 'authorization',
   password: thngApiKey 
 });

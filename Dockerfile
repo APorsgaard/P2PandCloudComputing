@@ -14,7 +14,7 @@ RUN apk add --no-cache curl gcc g++ make python2 && \
 
 # Create app directory
 WORKDIR /usr/src/wot-server
-#WORKDIR /usr/src/plug-with-control.js
+#WORKDIR /usr/src/simple-plug.js
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
