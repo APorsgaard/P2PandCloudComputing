@@ -2,7 +2,7 @@
   "name": "iot-project",
   "version": "1.0.0",
   "description": "Example AU IOT project",
-  "main": "src/wot-server.js",
+  "main": "src/plug-with-control.js",
   "scripts": {
     "start": "node src/wot-server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +15,7 @@
     "fs":"*",
     "express": "^4.16.3",
     "msgpack5": "^3.3.0",
+    "mqtt":"*",
     "node-dht-sensor": "0.0.34",
     "node-json2html": "^1.0.0",
     "object-observer": "^1.0.3",

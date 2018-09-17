@@ -5,10 +5,23 @@ var express = require('express'),
   converter = require('./../middleware/converter'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
-  path = require('path');
+  path = require('path'),
+  mqtt = require('mqtt'),
+  config = require('./../src/config.json');
+
+var thngId=config.thngId; 
+var thngUrl='/thngs/'+thngId;
+var thngApiKey=config.thngApiKey;
+var interval;
+
+console.log('Using Thng #'+thngId+' with API Key: '+ thngApiKey);
+
+var client = mqtt.connect("mqtts://mqtt.evrythng.com:8080", {// #B
+  username: 'authorization',
+  password: thngApiKey 
+});
 
 var app = express();
-
 
 app.use(bodyParser.json());
 
@@ -28,4 +41,5 @@ app.get('/pi', function (req, res) {
 
 app.use(converter());
 module.exports = app;
+
 

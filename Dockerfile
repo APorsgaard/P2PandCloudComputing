@@ -14,17 +14,13 @@ RUN apk add --no-cache curl gcc g++ make python2 && \
 
 # Create app directory
 WORKDIR /usr/src/wot-server
+#WORKDIR /usr/src/plug-with-control.js
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install node-json2html msgpack5 --save
-RUN npm install cors --save
-RUN npm install node-dht-sensor --save
-RUN npm install object-observer --save
-RUN npm install express --save
 RUN npm install
 
 # Bundle app source
