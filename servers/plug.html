@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    if (getParameterByName('key') != ""){
+      console.log('Get API key from query param:'+getParameterByName('key'))
+      key = getParameterByName('key');
+    }
+
+    if (getParameterByName('thngId') != ""){
+      console.log('Get thngId from query param:'+getParameterByName('thngId'));
+      thngId = getParameterByName('thngId');
+    }
+
+  </script>
+
+  <title>Group: Blossomforth</title>
+
+  <style class="anchorjs"></style><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
+  <!-- Documentation extras -->
+  <link href="./files/docs.min.css" rel="stylesheet">
+
+  <!-- Import D3 -->
+  <style>
+    svg {
+      font: 10px sans-serif;
+    }
+
+    .line {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1.5px;
+    }
+
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+
+
+  <body>
+
+    <!-- Docs page layout -->
+    <div class="bs-docs-header" id="content" tabindex="-1">
+      <div class="container">
+        <h1>Group: Blossomforth</h1>
+      </div>
+    </div>
+
+    <div class="container bs-docs-container">
+      <div class="row">
+        <div class="col-md-9" id="the-list" role="main">
+          <div class="bs-docs-section">
+
+            <h2>IoT Milestone3</h2>
+
+            <hr>
+            <h3>Properties</h3>
+
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span id="value-temperature" class="badge">0</span>
+                Temperature
+              </li>
+              <li class="list-group-item">
+                <span id="value-humidity" class="badge">0</span>
+                Humidity
+              </li>
+              <li class="list-group-item">
+                <span id="value-motion" class="badge">0</span>
+                Motion
+              </li>
+              <li class="list-group-item">
+                <span id="value-blue" class="badge">0</span>
+                Blue LED
+              </li>
+              <li class="list-group-item">
+                <span id="value-red" class="badge">0</span>
+                Red LED
+              </li>
+              <li class="list-group-item">
+                <span id="value-yellow" class="badge">0</span>
+                Yellow LED
+              </li>
+            </ul>
+
+<button onclick="switchLED1()"> Switch Blue LED on/off</button>
+
+<button onclick="switchLED2()"> Switch Red LED on/off</button>
+
+<button onclick="switchLED3()"> Switch Yellow LED on/off</button>
+
+            <script>
+var url = 'wss://ws.evrythng.com:443/thngs/'+thngId+'/properties?access_token='+key;
+var socket = new WebSocket(url);
+
+socket.onmessage = function (message) {
+  var content = JSON.parse(message.data);
+  console.log('Property update : ', content[0]);
+  if (content[0].key=="power"){
+    updateCharts(content[0].key, content[0].value, content[0].timestamp);
+  }
+  $('#value-'+content[0].key).html( content[0].value );
+};
+
+socket.onerror = function (error) {
+    console.log('An error occurred while trying to connect to a WebSocket!');
+    console.log(error);
+};
+
+            </script>
+
+            <script>
+
+function switchLED1(){
+    $.ajax({
+            url: 'http://raspberrypi.local:8080/pi/actuators/leds/1',
+            type: 'PUT',    
+            //data: JSON.stringify({"value": true}),
+            //contentType: 'application/json'
+      });  
+}
+
+function switchLED2(){
+    $.ajax({
+            url: 'http://raspberrypi.local:8080/pi/actuators/leds/2',
+            type: 'PUT',    
+      });  
+}
+
+function switchLED3(){
+    $.ajax({
+            url: 'http://raspberrypi.local:8080/pi/actuators/leds/3',
+            type: 'PUT',    
+      });  
+}
+function sendActionBlue(type,value){
+  console.log("You have pressed blue button");
+
+  $.ajax({
+      url: 'https://api.evrythng.com/thngs/'+thngId+'/actions/'+type+'?access_token='+key,
+      type: 'put',
+      });
+}
+            </script>
+          </div>
+          </div>
+        </div>
+
+<footer class="bs-docs-footer" role="contentinfo">
+  <div class="container">
+
+  </div>
+</footer>
+</body></html>
+
