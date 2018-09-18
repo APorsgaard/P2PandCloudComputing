@@ -63,6 +63,15 @@ function handleAction(action) {
 function updateProperties() {
   var temperature = resources.pi.sensors.temperature.value;
   updateProperty ('temperature',temperature);
+
+  var humidity = resources.pi.sensors.humidity.value;
+  updateProperty ('humidity',humidity);
+
+  var motion = resources.pi.sensors.pir.value + " ";
+  updateProperty ('motion',motion);
+
+  var blueLed = resources.pi.actuators.leds['1'].value;
+  updateProperty ('blueLed',blueLed);
 }
 
 function updateProperty(property,value) {
