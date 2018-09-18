@@ -1,5 +1,5 @@
 var mqtt = require('mqtt');
-var config = require('./config.json'); 
+var config = require('../config.json'); 
 
 var thngId=config.thngId; 
 var thngUrl='/thngs/'+thngId;
@@ -62,15 +62,8 @@ function handleAction(action) {
 
 
 function updateProperties() {
-  var voltage = (219.5 + Math.random()).toFixed(3); // #H
-  updateProperty ('voltage',voltage);
-
-  var current = (Math.random()*10).toFixed(3); // #I
-  if (status==false) current = 0.001;
-  updateProperty ('current',current);
-
-  var power = (voltage * current * (0.6+Math.random()/10)).toFixed(3); // #J
-  updateProperty ('power',power);
+  var temperature = (19.5 + Math.random()).toFixed(3); // #H
+  updateProperty ('temperature',temperature);
 }
 
 function updateProperty(property,value) {
