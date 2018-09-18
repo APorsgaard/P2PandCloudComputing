@@ -67,11 +67,17 @@ function updateProperties() {
   var humidity = resources.pi.sensors.humidity.value;
   updateProperty ('humidity',humidity);
 
-  var motion = resources.pi.sensors.pir.value + " ";
+  var motion = resources.pi.sensors.pir.value;
   updateProperty ('motion',motion);
 
-  var blueLed = resources.pi.actuators.leds['1'].value;
-  updateProperty ('blueLed',blueLed);
+  var blue = resources.pi.actuators.leds['1'].value;
+  updateProperty ('blue',blue);
+
+  var red = resources.pi.actuators.leds['2'].value;
+  updateProperty ('red',red);
+
+  var yellow = resources.pi.actuators.leds['3'].value;
+  updateProperty ('yellow',yellow);
 }
 
 function updateProperty(property,value) {
@@ -87,7 +93,7 @@ function updateProperty(property,value) {
   app.use('/pi/sensors', sensorRoutes); 
   
   app.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/websocketsClient.html'));
+  res.sendFile(path.join(__dirname+'/index.html'));
 });
 
   app.get('/pi', function (req, res) {
