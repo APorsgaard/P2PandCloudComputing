@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# IOT Milestone 1: Blossomforth
+# IOT Milestone 3: Blossomforth
 
 ## Building the docker image
 
@@ -21,7 +21,7 @@ $ docker run -d --rm -p 8080:8080 --privileged fancy-pants/iot-assignment
 ## Location of dynamic webpage
 
 ```
-The web page is located at raspberrypi.local:8080
+The web page is located at https://tn.gg/pRK79Xgx
 ```
 =======
 # Milestone2
