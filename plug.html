@@ -75,27 +75,27 @@
 
             <ul class="list-group">
               <li class="list-group-item">
-                <span id="value-temperature" class="badge">0</span>
+                <span id="value-temperature" class="badge">Connecting...</span>
                 Temperature
               </li>
               <li class="list-group-item">
-                <span id="value-humidity" class="badge">0</span>
+                <span id="value-humidity" class="badge">Connecting...</span>
                 Humidity
               </li>
               <li class="list-group-item">
-                <span id="value-motion" class="badge">0</span>
+                <span id="value-motion" class="badge">Connecting...</span>
                 Motion
               </li>
               <li class="list-group-item">
-                <span id="value-blue" class="badge">0</span>
+                <span id="value-blue" class="badge">Connecting...</span>
                 Blue LED
               </li>
               <li class="list-group-item">
-                <span id="value-red" class="badge">0</span>
+                <span id="value-red" class="badge">Connecting...</span>
                 Red LED
               </li>
               <li class="list-group-item">
-                <span id="value-yellow" class="badge">0</span>
+                <span id="value-yellow" class="badge">Connecting...</span>
                 Yellow LED
               </li>
             </ul>
@@ -117,7 +117,18 @@ socket.onmessage = function (message) {
   if (content[0].key=="power"){
     updateCharts(content[0].key, content[0].value, content[0].timestamp);
   }
-  $('#value-'+content[0].key).html( content[0].value );
+  
+  let htmlString="";
+  if (content[0].key === "motion") {
+    if(content[0].value) htmlString="There is someone";
+    else htmlString = "Nobody is there";     
+  }
+  else if(typeof content[0].value === "boolean"){    
+    if(content[0].value) htmlString="On";
+    else htmlString = "Off";
+  }
+  else htmlString=content[0].value;
+  $('#value-'+content[0].key).html( htmlString );
 };
 
 socket.onerror = function (error) {
