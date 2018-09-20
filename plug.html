@@ -100,11 +100,12 @@
               </li>
             </ul>
 
-<button onclick="switchLED1()"> Switch Blue LED on/off</button>
+<!--<button onclick="switchLED1()"> Switch Blue LED on/off</button>-->
+<button onclick="sendAction('_setLedState', {'led':'blue'})"> Switch Blue LED on/off</button>
 
-<button onclick="switchLED2()"> Switch Red LED on/off</button>
+<button onclick="sendAction('_setLedState', {'led':'red'})"> Switch Red LED on/off</button>
 
-<button onclick="switchLED3()"> Switch Yellow LED on/off</button>
+<button onclick="sendAction('_setLedState', {'led':'yellow'})"> Switch Yellow LED on/off</button>
 
             <script>
 var url = 'wss://ws.evrythng.com:443/thngs/'+thngId+'/properties?access_token='+key;
@@ -124,9 +125,6 @@ socket.onerror = function (error) {
     console.log(error);
 };
 
-            </script>
-
-            <script>
 
 function switchLED1(){
     $.ajax({
@@ -150,13 +148,23 @@ function switchLED3(){
             type: 'PUT',    
       });  
 }
-function sendActionBlue(type,value){
+function sendAction(type,value){
   console.log("You have pressed blue button");
 
   $.ajax({
       url: 'https://api.evrythng.com/thngs/'+thngId+'/actions/'+type+'?access_token='+key,
-      type: 'put',
-      });
+      dataType: 'json',
+      type: 'post',
+      contentType: 'application/json',
+      data: JSON.stringify({"type": type, "thng": thngId, "customFields":value}),
+      processData: false,
+      success: function( data, textStatus, jQxhr ){
+          $('#response pre').html( JSON.stringify( data ) );
+      },
+      error: function( jqXhr, textStatus, errorThrown ){
+          console.log( errorThrown );
+      }
+  });
 }
             </script>
           </div>
