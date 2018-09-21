@@ -16,6 +16,7 @@ var thngApiKey=config.thngApiKey;
 //var status=false;
 var led;
 var updateInterval;
+var state;
 
 var client = mqtt.connect("mqtts://mqtt.evrythng.com:8883", {
   username: 'authorization',
@@ -49,19 +50,32 @@ function handleAction(action) {
     case '_setLedState':
       console.log('ACTION: _setLedState changed the '+action.customFields.led +' led');
       led = action.customFields.led;
+      state = action.customFields.state;
       if (led === "blue"){
         var blueLed = resources.pi.actuators.leds['1'];
-	if (blueLed.value) {
-	   blueLed.value = false;
+        if (state === "true") {
+         blueLed.value = true;
         } else {
-	   blueLed.value = true;
-	}
+         blueLed.value = false;
+       }
       }
-      else console.log("Det var ikke den blaa led");
-      /* Do something else too */
-      break;
-    case '_setLevel':
-      console.log('ACTION: _setLevel changed to: '+action.customFields.level);
+      if (led === "red"){
+        var redLed = resources.pi.actuators.leds['2'];
+          if (state === "true") {
+           redLed.value = true;
+          } else {
+           redLed.value = false;
+          }
+      }
+      if (led === "yellow"){
+        var yellowLed = resources.pi.actuators.leds['3'];
+          if (state === "true") {
+           yellowLed.value = true;
+          } else {
+           yellowLed.value = false;
+          }
+      }
+      updateProperties();
       break;
     default:
       console.log('ACTION: Unknown action type: '+action.type);
@@ -117,4 +131,5 @@ function updateProperty(property,value) {
 	client.end();
   process.exit();
 });
+
 

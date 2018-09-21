@@ -25,7 +25,6 @@
       console.log('Get thngId from query param:'+getParameterByName('thngId'));
       thngId = getParameterByName('thngId');
     }
-
   </script>
 
   <title>Group: Blossomforth</title>
@@ -49,15 +48,32 @@
       stroke-width: 1.5px;
     }
 
+    .image{
+    	position: fixed;
+    	left: 65%;
+    	top: 2%
+    	-webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+
+    .container{
+    	color: #E959A3;
+    }
+
+    .bs-docs-header{
+    	background-color: #76e08d;
+    }
+
   </style>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+
 </head>
-
-
   <body>
-
-    <!-- Docs page layout -->
     <div class="bs-docs-header" id="content" tabindex="-1">
+    	<div class="image">
+    		<img src="https://img00.deviantart.net/5954/i/2012/228/6/2/vector___blossomforth_by_slench-d5bbapa.png" width=80% height=80%>
+    	</div>
       <div class="container">
         <h1>Group: Blossomforth</h1>
       </div>
@@ -71,53 +87,55 @@
             <h2>IoT Milestone3</h2>
 
             <hr>
+
             <h3>Properties</h3>
 
             <ul class="list-group">
               <li class="list-group-item">
                 <span id="value-temperature" class="badge">Connecting...</span>
-                Temperature
+                <b>Temperature</b>
               </li>
               <li class="list-group-item">
                 <span id="value-humidity" class="badge">Connecting...</span>
-                Humidity
+                <b>Humidity</b>
               </li>
               <li class="list-group-item">
                 <span id="value-motion" class="badge">Connecting...</span>
-                Motion
+                <b>Motion</b>
               </li>
               <li class="list-group-item">
                 <span id="value-blue" class="badge">Connecting...</span>
-                Blue LED
+                <b>LED1</b>
               </li>
               <li class="list-group-item">
                 <span id="value-red" class="badge">Connecting...</span>
-                Red LED
+                <b>LED2</b>
               </li>
               <li class="list-group-item">
                 <span id="value-yellow" class="badge">Connecting...</span>
-                Yellow LED
+                <b>LED3</b>
               </li>
             </ul>
 
-<!--<button onclick="switchLED1()"> Switch Blue LED on/off</button>-->
-<button onclick="sendAction('_setLedState', {'led':'blue'})"> Switch Blue LED on/off</button>
+<button onclick="sendAction('_setLedState', {'led':'blue', 'state':'true'})"> Switch LED1 on</button>
 
-<button onclick="sendAction('_setLedState', {'led':'red'})"> Switch Red LED on/off</button>
+<button onclick="sendAction('_setLedState', {'led':'blue', 'state':'false'})"> Switch LED1 off</button>
 
-<button onclick="sendAction('_setLedState', {'led':'yellow'})"> Switch Yellow LED on/off</button>
+<button onclick="sendAction('_setLedState', {'led':'red', 'state':'true'})"> Switch LED2 on</button>
 
-            <script>
+<button onclick="sendAction('_setLedState', {'led':'red', 'state':'false'})"> Switch LED2 off</button>
+
+<button onclick="sendAction('_setLedState', {'led':'yellow', 'state':'true'})"> Switch LED3 on</button>
+
+<button onclick="sendAction('_setLedState', {'led':'yellow', 'state':'false'})"> Switch LED3 off</button>
+
+<script>
 var url = 'wss://ws.evrythng.com:443/thngs/'+thngId+'/properties?access_token='+key;
 var socket = new WebSocket(url);
 
 socket.onmessage = function (message) {
   var content = JSON.parse(message.data);
-  console.log('Property update : ', content[0]);
-  if (content[0].key=="power"){
-    updateCharts(content[0].key, content[0].value, content[0].timestamp);
-  }
-  
+  console.log('Property update : ', content[0]);  
   let htmlString="";
   if (content[0].key === "motion") {
     if(content[0].value) htmlString="There is someone";
@@ -136,32 +154,7 @@ socket.onerror = function (error) {
     console.log(error);
 };
 
-
-function switchLED1(){
-    $.ajax({
-            url: 'http://raspberrypi.local:8080/pi/actuators/leds/1',
-            type: 'PUT',    
-            //data: JSON.stringify({"value": true}),
-            //contentType: 'application/json'
-      });  
-}
-
-function switchLED2(){
-    $.ajax({
-            url: 'http://raspberrypi.local:8080/pi/actuators/leds/2',
-            type: 'PUT',    
-      });  
-}
-
-function switchLED3(){
-    $.ajax({
-            url: 'http://raspberrypi.local:8080/pi/actuators/leds/3',
-            type: 'PUT',    
-      });  
-}
 function sendAction(type,value){
-  console.log("You have pressed blue button");
-
   $.ajax({
       url: 'https://api.evrythng.com/thngs/'+thngId+'/actions/'+type+'?access_token='+key,
       dataType: 'json',
@@ -188,4 +181,5 @@ function sendAction(type,value){
   </div>
 </footer>
 </body></html>
+
 
